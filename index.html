@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ГАЗ Юниор | Спортивная команда</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 80px 24px 40px;
+            background: linear-gradient(145deg, #0f0f0f 0%, #050505 100%);
+            border-bottom: 1px solid #222;
+        }
+        .hero h1 {
+            font-size: 3.3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #ffaa44);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+        }
+        .hero-logo {
+            margin: 30px auto 16px;
+            max-width: 380px;
+            width: 80%;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 10px 30px rgba(255, 102, 0, 0.4));
+        }
+        .hero .sub { font-size: 1.3rem; color: #ffaa66; margin-top: 8px; font-weight: 500; }
+        .hero .trainer {
+            margin-top: 12px;
+            font-size: 1.1rem;
+            background: #1a1a1a;
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 40px;
+            color: #ccc;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Gallery */
+        .gallery-section { padding: 60px 0 40px; background: #000000cc; overflow: hidden; }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            letter-spacing: -0.3px;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        .section-title span {
+            background: linear-gradient(120deg, #ff9900, #ff4400);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            border-bottom: 2px solid #ff6600;
+            padding-bottom: 6px;
+        }
+
+        .swiper {
+            width: 100%;
+            padding: 20px 0 50px;
+            overflow: visible;
+        }
+        .gallery-section .container {
+            overflow: visible;
+        }
+        /* «Окошко» для карусели, чтобы боковые слайды не вылезали за пределы экрана */
+        .swiper-viewport {
+            overflow: hidden;
+            padding: 0 60px;
+            margin: 0 -60px;
+        }
+
+        .swiper-slide {
+            background-position: center;
+            background-size: cover;
+            width: 480px;
+            height: 320px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.7);
+            transition: all 0.3s;
+            background: #1a1a1a;
+            flex-shrink: 0;
+            cursor: zoom-in;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .swiper-slide:hover img { transform: scale(1.02); }
+
+        .custom-nav { display: flex; justify-content: center; gap: 25px; margin-top: 20px; }
+        .nav-btn {
+            background: #222;
+            border: 1px solid #ff6600;
+            color: #ffaa66;
+            width: 48px;
+            height: 48px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .nav-btn:hover { background: #ff6600; color: #000; border-color: #ffaa66; transform: scale(1.05); }
+
+        /* Info Cards */
+        .info-section {
+            padding: 70px 0;
+            background: radial-gradient(circle at 10% 20%, #0e0e0e, #030303);
+        }
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-top: 20px;
+        }
+        .info-card {
+            background: #121212;
+            border-radius: 32px;
+            padding: 28px 24px;
+            border: 1px solid #2a2a2a;
+            transition: all 0.25s ease;
+            backdrop-filter: blur(2px);
+        }
+        .info-card:hover {
+            transform: translateY(-6px);
+            border-color: #ff7733;
+            box-shadow: 0 20px 30px -15px rgba(255, 68, 0, 0.2);
+        }
+        .card-icon { font-size: 2.7rem; margin-bottom: 18px; }
+        .info-card h3 { font-size: 1.7rem; font-weight: 700; margin-bottom: 18px; color: #ff9f4a; }
+        .info-card p, .info-card li { font-size: 1rem; color: #cfcfcf; margin-bottom: 10px; }
+        .info-card ul { padding-left: 20px; margin: 10px 0; }
+        .info-card li { margin-bottom: 8px; }
+
+        .badge-list { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 15px; }
+        .badge {
+            background: #1f1f1f;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #ffaa66;
+            border-left: 2px solid #ff6600;
+        }
+
+        .vk-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #2787F5;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 25px;
+            transition: 0.2s;
+        }
+        .vk-link:hover { background: #1e68c4; transform: scale(1.02); }
+
+        .footer {
+            text-align: center;
+            padding: 35px 20px;
+            border-top: 1px solid #222;
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        /* ===== Lightbox / Modal ===== */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(6px);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+        .lightbox.open {
+            display: flex;
+            opacity: 1;
+        }
+        .lightbox-swiper {
+            width: calc(100% - 140px);
+            max-width: 1400px;
+            height: calc(100% - 80px);
+        }
+        .lightbox-swiper .swiper-slide {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            box-shadow: none;
+            border-radius: 12px;
+            cursor: default;
+        }
+        .lightbox-swiper .swiper-slide img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.7);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(30, 30, 30, 0.85);
+            border: 1px solid #ff6600;
+            color: #ffaa66;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            z-index: 10002;
+        }
+        .lightbox-close:hover {
+            background: #ff6600;
+            color: #000;
+            transform: scale(1.08) rotate(90deg);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(30, 30, 30, 0.85);
+            border: 1px solid #ff6600;
+            color: #ffaa66;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            z-index: 10002;
+            user-select: none;
+        }
+        .lightbox-nav:hover {
+            background: #ff6600;
+            color: #000;
+            transform: translateY(-50%) scale(1.08);
+        }
+        .lightbox-prev { left: 24px; }
+        .lightbox-next { right: 24px; }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(30, 30, 30, 0.85);
+            border: 1px solid #ff6600;
+            color: #ffaa66;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 10002;
+        }
+
+        @media (max-width: 680px) {
+            .hero h1 { font-size: 2rem; }
+            .hero-logo { max-width: 260px; width: 75%; }
+            .swiper-slide { width: 320px; height: 215px; }
+            .section-title { font-size: 1.6rem; }
+            .swiper-viewport { padding: 0 20px; margin: 0 -20px; }
+
+            .lightbox-swiper { width: calc(100% - 30px); height: calc(100% - 130px); }
+            .lightbox-nav {
+                width: 44px;
+                height: 44px;
+                font-size: 22px;
+            }
+            .lightbox-prev { left: 8px; }
+            .lightbox-next { right: 8px; }
+            .lightbox-close { top: 12px; right: 12px; width: 40px; height: 40px; font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <h1>ГАЗ Юниор</h1>
+    <img class="hero-logo" src="images/logo1-P.png" alt="Логотип ГАЗ Юниор">
+    <div class="sub">Спортивная команда</div>
+    <div class="trainer">🏁 Тренер: Готовцев С.Е. 🏁</div>
+</header>
+
+<div class="gallery-section">
+    <div class="container">
+        <div class="section-title"><span>⚡ Моменты скорости ⚡</span></div>
+        <div class="swiper-viewport">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="images/photo1.png" alt="ГАЗ Юниор слайд 1" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="images/photo2.png" alt="ГАЗ Юниор слайд 2" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="images/photo3.png" alt="ГАЗ Юниор слайд 3" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="images/photo4.png" alt="ГАЗ Юниор слайд 4" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="images/photo5.png" alt="ГАЗ Юниор слайд 5" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="images/photo6.png" alt="ГАЗ Юниор слайд 6" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="images/photo7.png" alt="ГАЗ Юниор слайд 7" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="images/photo8.png" alt="ГАЗ Юниор слайд 8" loading="lazy"></div>
+                </div>
+            </div>
+        </div>
+        <div class="custom-nav">
+            <div class="nav-btn swiper-button-prev-custom">‹</div>
+            <div class="nav-btn swiper-button-next-custom">›</div>
+        </div>
+    </div>
+</div>
+
+<div class="info-section">
+    <div class="container">
+        <div class="section-title"><span>🏆 О команде 🏆</span></div>
+        <div class="cards-grid">
+            <div class="info-card">
+                <div class="card-icon">👨‍🏫</div>
+                <h3>Руководство & Тренер</h3>
+                <p><strong>Главный тренер:</strong> Готовцев Сергей Евгеньевич — опытный наставник, руководитель объединения «Картинг» с 2008 года. Воспитанники ежегодно становятся чемпионами Нижегородской области и призерами всероссийских стартов.</p>
+                <p><strong>Руководитель команды:</strong> Кузьмин Михаил (глава Йошкар-Олинского отделения), <strong>организатор:</strong> Умнов Дмитрий.</p>
+                <p>Тренерский стаж более 15 лет, работает с детьми от 5 лет.</p>
+                <div class="badge-list"><span class="badge">🏅 Педагог высшей пробы</span><span class="badge">🔥 Картинг-академия</span></div>
+            </div>
+            <div class="info-card">
+                <div class="card-icon">🎯</div>
+                <h3>Миссия и цели</h3>
+                <p>Развитие детско-юношеского автомобильного спорта в Нижегородской области, воспитание характера, дисциплины и технического мышления. Команда «ГАЗ Юниор» дает путевку в большой автоспорт, обучая юных пилотов управлению картами и гоночной этике.</p>
+                <p>🏁 <strong>Ценности:</strong> скорость, безопасность, уважение к соперникам, стремление к лидерству.</p>
+                <p>При поддержке ГАЗ и партнеров команда регулярно участвует в рейтинговых соревнованиях по картингу.</p>
+            </div>
+            <div class="info-card">
+                <div class="card-icon">🏆</div>
+                <h3>Победы и достижения</h3>
+                <ul>
+                    <li>🥇 Открытое первенство Чувашии по зимнему картингу — 2 золота и серебро (команда «ГАЗ Юниор» дебютировала с блеском).</li>
+                    <li>🏆 Многократные чемпионы Нижегородской области, призеры Кубка КАМАЗ-Мастер.</li>
+                    <li>⭐ Воспитанники: Софья Серова (10 лет) — обладательница более 50 кубков, победительница всероссийских турниров.</li>
+                    <li>🚩 Команда регулярно выигрывает этапы областных соревнований, показывая высокий уровень подготовки.</li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <div class="card-icon">🧒🏎️</div>
+                <h3>Кто может прийти?</h3>
+                <p><strong>Набор с 5 лет!</strong> Мальчики и девочки, желающие освоить картинг, научиться работать в команде и достигать высот в автоспорте.</p>
+                <p>✅ <strong>Требования:</strong> интерес к технике, дисциплина, отсутствие медицинских противопоказаний. Опыт не требуется — всему научат профессиональные инструкторы.</p>
+                <p>📍 Занятия проходят в Нижнем Новгороде, на Бору, а также в отделениях (Йошкар-Ола).</p>
+                <div class="badge-list"><span class="badge">👧 Девушки приветствуются</span><span class="badge">🔧 Все экипировка предоставляется</span></div>
+                <a href="https://vk.ru/gazjuniorteam" target="_blank" rel="noopener" class="vk-link">📱 Официальное сообщество ВКонтакте</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <p>ГАЗ Юниор | Спортивная команда (тренер Готовцев С.Е.) | Развитие автоспорта с юных лет</p>
+    <p style="margin-top: 12px;">© 2025 | Академия автомотоспорта | Все фото — из архивов команды, дисков и официальной группы</p>
+</footer>
+
+<!-- ===== Lightbox modal ===== -->
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" title="Закрыть">✕</button>
+    <div class="lightbox-nav lightbox-prev" id="lightboxPrev">‹</div>
+    <div class="lightbox-nav lightbox-next" id="lightboxNext">›</div>
+    <div class="swiper lightbox-swiper" id="lightboxSwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="images/photo1.png" alt="ГАЗ Юниор фото 1"></div>
+            <div class="swiper-slide"><img src="images/photo2.png" alt="ГАЗ Юниор фото 2"></div>
+            <div class="swiper-slide"><img src="images/photo3.png" alt="ГАЗ Юниор фото 3"></div>
+            <div class="swiper-slide"><img src="images/photo4.png" alt="ГАЗ Юниор фото 4"></div>
+            <div class="swiper-slide"><img src="images/photo5.png" alt="ГАЗ Юниор фото 5"></div>
+            <div class="swiper-slide"><img src="images/photo6.png" alt="ГАЗ Юниор фото 6"></div>
+            <div class="swiper-slide"><img src="images/photo7.png" alt="ГАЗ Юниор фото 7"></div>
+            <div class="swiper-slide"><img src="images/photo8.png" alt="ГАЗ Юниор фото 8"></div>
+        </div>
+    </div>
+    <div class="lightbox-counter" id="lightboxCounter">1 / 8</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    // ===== Основная карусель =====
+    const swiper = new Swiper('.mySwiper', {
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        loop: true,
+        speed: 800,
+        coverflowEffect: {
+            rotate: 25,
+            stretch: 0,
+            depth: 150,
+            modifier: 1,
+            slideShadows: true
+        },
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true
+        },
+        navigation: {
+            nextEl: '.swiper-button-next-custom',
+            prevEl: '.swiper-button-prev-custom',
+        }
+    });
+
+    // ===== Lightbox =====
+    const lightbox = document.getElementById('lightbox');
+    const lightboxCloseBtn = document.getElementById('lightboxClose');
+    const lightboxPrevBtn = document.getElementById('lightboxPrev');
+    const lightboxNextBtn = document.getElementById('lightboxNext');
+    const lightboxCounter = document.getElementById('lightboxCounter');
+
+    let lightboxSwiper = null;
+    const totalSlides = document.querySelectorAll('#lightboxSwiper .swiper-slide').length;
+
+    function initLightboxSwiper() {
+        if (lightboxSwiper) return;
+        lightboxSwiper = new Swiper('#lightboxSwiper', {
+            slidesPerView: 1,
+            loop: true,
+            speed: 400,
+            spaceBetween: 30,
+            navigation: {
+                nextEl: '#lightboxNext',
+                prevEl: '#lightboxPrev',
+            },
+            keyboard: { enabled: true },
+            on: {
+                slideChange: function () {
+                    lightboxCounter.textContent = (this.realIndex + 1) + ' / ' + totalSlides;
+                }
+            }
+        });
+    }
+
+    function openLightbox(index) {
+        initLightboxSwiper();
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        // Пауза автопрокрутки основной карусели
+        if (swiper && swiper.autoplay) swiper.autoplay.stop();
+        // Переход на нужный слайд
+        lightboxSwiper.slideToLoop(index, 0);
+        lightboxCounter.textContent = (index + 1) + ' / ' + totalSlides;
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+        if (swiper && swiper.autoplay) swiper.autoplay.start();
+    }
+
+    // Привязка клика к слайдам основной карусели
+    document.querySelectorAll('.mySwiper .swiper-slide').forEach((slide) => {
+        slide.addEventListener('click', function (e) {
+            // Берём реальный индекс (для loop у swiper есть data-swiper-slide-index)
+            const realIndexAttr = this.getAttribute('data-swiper-slide-index');
+            const idx = realIndexAttr !== null ? parseInt(realIndexAttr, 10) : 0;
+            openLightbox(idx);
+        });
+    });
+
+    lightboxCloseBtn.addEventListener('click', closeLightbox);
+
+    // Закрытие по клику на фон
+    lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    // Закрытие по Escape
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && lightbox.classList.contains('open')) {
+            closeLightbox();
+        }
+    });
+</script>
+</body>
+</html>
